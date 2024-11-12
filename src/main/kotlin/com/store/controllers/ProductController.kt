@@ -1,5 +1,6 @@
 package com.store.controllers
 
+import com.store.entity.Product
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 class ProductController {
 
     @GetMapping
-    fun getProducts(): ResponseEntity<Any> {
-        return ResponseEntity(HttpStatus.OK)
+    fun getProducts(): ResponseEntity<List<Product>> {
+        return ResponseEntity(listOf(Product(1, "abc", "gadget", 2)), HttpStatus.OK)
     }
 
     @PostMapping
