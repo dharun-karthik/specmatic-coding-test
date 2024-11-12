@@ -1,8 +1,8 @@
 package com.store.controllers
 
-import com.store.config.ProductList
 import com.store.constants.ProductType
 import com.store.entity.Product
+import com.store.service.ProductService
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,19 +24,19 @@ class ProductControllerTest {
 
     private lateinit var mockMvc: MockMvc
 
-    private lateinit var productList: ProductList
+    private lateinit var productService: ProductService
 
     @BeforeEach
     fun setUp() {
-        productList = mock(ProductList::class.java)
+        productService = mock(ProductService::class.java)
         mockMvc = MockMvcBuilders.standaloneSetup(
-            ProductController(productList)
+            ProductController(productService)
         ).build()
     }
 
     @Test
     fun getCallShouldReturnProductsWithoutQueryParam() {
-        `when`(productList.getProducts(null)).thenReturn(listOf(Product(1, "abc", ProductType.GADGET, 2)))
+        `when`(productService.getProducts(null)).thenReturn(listOf(Product(1, "abc", ProductType.GADGET, 2)))
 
         mockMvc.perform(get("/products"))
             .andExpect(status().isOk)
@@ -51,7 +51,16 @@ class ProductControllerTest {
     fun getCallShouldReturnProductWithTypeQueryParam() {
         val params: MultiValueMap<String, String> = LinkedMultiValueMap()
         params.add("type", "GADGET")
-        `when`(productList.getProducts(ProductType.GADGET)).thenReturn(listOf(Product(1, "abc", ProductType.GADGET, 2)))
+        `when`(productService.getProducts(ProductType.GADGET)).thenReturn(
+            listOf(
+                Product(
+                    1,
+                    "abc",
+                    ProductType.GADGET,
+                    2
+                )
+            )
+        )
 
         mockMvc.perform(get("/products").queryParams(params))
             .andExpect(status().isOk)
