@@ -1,0 +1,14 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8090
+
+product-list:
+  products:
+    - id: 1
+      name: 'XYZ Phone'
+      type: 'gadget'
+      inventory: 2

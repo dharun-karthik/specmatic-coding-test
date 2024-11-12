@@ -1,5 +1,6 @@
 package com.store.controllers
 
+import com.store.config.ProductList
 import com.store.entity.Product
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/products")
-class ProductController {
+class ProductController(private val productList: ProductList) {
 
     @GetMapping
     fun getProducts(): ResponseEntity<List<Product>> {
-        return ResponseEntity(listOf(Product(1, "abc", "gadget", 2)), HttpStatus.OK)
+        val products = productList.products
+        return ResponseEntity(products, HttpStatus.OK)
     }
 
     @PostMapping
