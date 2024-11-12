@@ -10,5 +10,5 @@ product-list:
   products:
     - id: 1
       name: 'XYZ Phone'
-      type: 'gadget'
+      type: 'GADGET'
       inventory: 2
