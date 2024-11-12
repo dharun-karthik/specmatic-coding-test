@@ -12,3 +12,15 @@ product-list:
       name: 'XYZ Phone'
       type: 'GADGET'
       inventory: 2
+    - id: 2
+      name: 'ABC food'
+      type: 'FOOD'
+      inventory: 5
+    - id: 3
+      name: 'LMN Book'
+      type: 'BOOK'
+      inventory: 10
+    - id: 4
+      name: 'PQR Pen'
+      type: 'OTHER'
+      inventory: 15
