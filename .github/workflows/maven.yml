@@ -24,4 +24,4 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: Build with Maven
       working-directory: main
-      run: mvn test
+      run: mvn test -X
