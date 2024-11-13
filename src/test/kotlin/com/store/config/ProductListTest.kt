@@ -24,12 +24,14 @@ class ProductListTest {
     @Test
     fun shouldReturnAllProductsWhenTypeIsNull() {
         val products = productList.getProducts(null)
+
         assertEquals(3, products.size)
     }
 
     @Test
     fun shouldReturnOnlyProductsOfThatTypeWhenProductTypeIsProvided() {
         val products = productList.getProducts(ProductType.GADGET)
+
         assertEquals(2, products.size)
         assertEquals(1, products[0].id)
         assertEquals("abc", products[0].name)
@@ -39,5 +41,17 @@ class ProductListTest {
         assertEquals("def", products[1].name)
         assertEquals(ProductType.GADGET, products[1].type)
         assertEquals(3, products[1].inventory)
+    }
+
+    @Test
+    fun shouldAddProduct() {
+        productList.addProduct(Product(4, "jkl", ProductType.OTHER, 5))
+
+        val products = productList.getProducts(null)
+        assertEquals(4, products.size)
+        assertEquals(4, products[3].id)
+        assertEquals("jkl", products[3].name)
+        assertEquals(ProductType.OTHER, products[3].type)
+        assertEquals(5, products[3].inventory)
     }
 }

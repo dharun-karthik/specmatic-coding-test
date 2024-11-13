@@ -9,7 +9,12 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties(prefix = "product-list")
 open class ProductList(var products: List<Product> = listOf()) {
 
-    fun getProducts(type: ProductType?): List<Product> {
+    fun getProducts(type: ProductType? = null): List<Product> {
         return products.filter { type == null || it.type == type }
     }
+
+    fun addProduct(product: Product) {
+        products = products.plus(product)
+    }
+
 }

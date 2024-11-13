@@ -1,7 +1,8 @@
 package com.store.config
 
 import com.store.constants.ProductType
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class StringToProductTypeConverterTest{
