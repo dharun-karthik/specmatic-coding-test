@@ -8,5 +8,6 @@ data class ProductCreateRequest(
     val name: String,
     val type: ProductType,
     @field:Min(1) @field:Max(9999)
-    val inventory: Int
+    val inventory: Int,
+    val cost: Int?
 )
