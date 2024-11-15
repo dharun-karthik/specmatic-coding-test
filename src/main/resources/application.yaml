@@ -12,15 +12,19 @@ product-list:
       name: 'XYZ Phone'
       type: 'GADGET'
       inventory: 2
+      cost: 12
     - id: 2
       name: 'ABC food'
       type: 'FOOD'
       inventory: 5
+      cost: 15
     - id: 3
       name: 'LMN Book'
       type: 'BOOK'
       inventory: 10
+      cost: 67
     - id: 4
       name: 'PQR Pen'
       type: 'OTHER'
       inventory: 15
+      cost: 12

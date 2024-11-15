@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
+import java.math.BigDecimal
 
 @ExtendWith(MockitoExtension::class)
 class ProductControllerTest {
@@ -37,7 +38,17 @@ class ProductControllerTest {
 
     @Test
     fun getCallShouldReturnProductsWithoutQueryParam() {
-        `when`(productService.getProducts(null)).thenReturn(listOf(Product(1, "abc", ProductType.GADGET, 2)))
+        `when`(productService.getProducts(null)).thenReturn(
+            listOf(
+                Product(
+                    1,
+                    "abc",
+                    ProductType.GADGET,
+                    2,
+                    BigDecimal.ZERO
+                )
+            )
+        )
 
         mockMvc.perform(get("/products"))
             .andExpect(status().isOk)
@@ -58,7 +69,8 @@ class ProductControllerTest {
                     1,
                     "abc",
                     ProductType.GADGET,
-                    2
+                    2,
+                    BigDecimal.ZERO
                 )
             )
         )
@@ -104,4 +116,26 @@ class ProductControllerTest {
         )
             .andExpect(status().isBadRequest)
     }
+
+    @Test
+    fun postProductCallShouldReturn400IfTheCostIsNull() {
+        mockMvc.perform(
+            post("/products")
+                .contentType("application/json")
+                .content("{\"name\":\"abc\",\"type\":\"gadget\",\"inventory\":2,\"cost\":null}")
+        )
+            .andExpect(status().isBadRequest)
+    }
+
+    @Test
+    fun postProductCallSucceedIfThereIsNotCostParameter() {
+        mockMvc.perform(
+            post("/products")
+                .contentType("application/json")
+                .content("{\"name\":\"abc\",\"type\":\"gadget\",\"inventory\":2}")
+        )
+            .andExpect(status().isCreated)
+    }
+
+
 }

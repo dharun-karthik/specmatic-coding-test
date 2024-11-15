@@ -8,6 +8,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
+import java.math.BigDecimal
 
 class ProductServiceTest {
     private lateinit var productService: ProductService
@@ -39,16 +40,16 @@ class ProductServiceTest {
 
     @Test
     fun shouldCallTheProductListAddProductMethod() {
-        val productCreateRequest = ProductCreateRequest("abc", ProductType.GADGET, 2)
+        val productCreateRequest = ProductCreateRequest("abc", ProductType.GADGET, 2, BigDecimal.TEN)
         `when`(productList.getProducts(null)).thenReturn(
             listOf(
-                Product(1, "xyz", ProductType.OTHER, 6),
+                Product(1, "xyz", ProductType.OTHER, 6, BigDecimal.TEN),
             )
         )
 
         productService.addProduct(productCreateRequest)
 
-        verify(productList, times(1)).addProduct(Product(2, "abc", ProductType.GADGET, 2))
+        verify(productList, times(1)).addProduct(Product(2, "abc", ProductType.GADGET, 2, BigDecimal.TEN))
     }
 
 

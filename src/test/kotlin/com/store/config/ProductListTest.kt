@@ -5,6 +5,7 @@ import com.store.entity.Product
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.math.BigDecimal
 
 class ProductListTest {
 
@@ -14,9 +15,9 @@ class ProductListTest {
     fun setup() {
         productList = ProductList(
             listOf(
-                Product(1, "abc", ProductType.GADGET, 2),
-                Product(2, "def", ProductType.GADGET, 3),
-                Product(3, "ghi", ProductType.OTHER, 4)
+                Product(1, "abc", ProductType.GADGET, 2, BigDecimal.TEN),
+                Product(2, "def", ProductType.GADGET, 3, BigDecimal.ONE),
+                Product(3, "ghi", ProductType.OTHER, 4, BigDecimal.ONE)
             )
         )
     }
@@ -45,7 +46,7 @@ class ProductListTest {
 
     @Test
     fun shouldAddProduct() {
-        productList.addProduct(Product(4, "jkl", ProductType.OTHER, 5))
+        productList.addProduct(Product(4, "jkl", ProductType.OTHER, 5, BigDecimal.TEN))
 
         val products = productList.getProducts(null)
         assertEquals(4, products.size)
@@ -53,5 +54,6 @@ class ProductListTest {
         assertEquals("jkl", products[3].name)
         assertEquals(ProductType.OTHER, products[3].type)
         assertEquals(5, products[3].inventory)
+        assertEquals(BigDecimal.TEN, products[3].cost)
     }
 }

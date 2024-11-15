@@ -15,7 +15,7 @@ class ProductService(private val productList: ProductList) {
 
     fun addProduct(product: ProductCreateRequest): Int {
         val generateId = generateId();
-        productList.addProduct(Product(generateId, product.name, product.type, product.inventory))
+        productList.addProduct(Product(generateId, product.name, product.type, product.inventory, product.cost))
         return generateId
     }
 
